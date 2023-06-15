@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <script src="chanllenge1.js"></script> -->
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="chanllenge1">
+        <h2>Chanllenge1</h2>
+        <p>
+            <h3>Cầu thủ được thêm vào đội bóng:</h3>
+            <div id="add"></div>
+        </p>
+        <p>
+            <h3> Đội chiến thắng:</h3>
+            <div id="team_win"></div>
+        </p>
+    </div>
+ 
+    <div class="chanllenge2">
+        <h2>Chanllenge2</h2>
+        <p id="bai1"></p>
+        <p id="bai2"></p>
+        <p id="bai3"></p>
+
+
+    </div>
+   
+  </body>
+  <script>
+    // CHANLLENGE1
+    // toán tử 3 chấm tên là spread
+// mảng cầu thủ cho đội 1 và đội 2
+
+var players1 = [{"gk": "Pickford Jordan"},{"fieldPlayers": "Alexander-Arnold Trent"},{"fieldPlayers": "Coady Conor"},{"fieldPlayers": "Maguire Harry"},{"fieldPlayers": "Shaw Luke"},{"fieldPlayers": "Stones John"},{"fieldPlayers": "Trippier Kieran"},{"fieldPlayers": "Walker Kyle"},{"fieldPlayers": "	White Ben"},{"fieldPlayers": "	Bellingham Jude"},{"fieldPlayers": "Bellingham Jude"},];
+
+var players2 = [{"gk": "Pope Nick"},{"fieldPlayers": "Southgate Gareth"},{"fieldPlayers": "Wilson Callum"},{"fieldPlayers": "Sterling Raheem"},{"fieldPlayers": "Rashford Marcus"},{"fieldPlayers": "Kane Harry"},{"fieldPlayers": "Saka Bukayo"},{"fieldPlayers": "Rice Declan"},{"fieldPlayers": "Phillips Kalvin"},{"fieldPlayers": "Mount Mason"},{"fieldPlayers": "Maddison James"},];
+
+// mảng allPlayers bao gồm 22 cầu thủ trên sân
+const allPlayers = [...players1, ...players2];
+console.log(allPlayers);
+
+// mảng thêm 3 người cho đội 1
+const players1Final = [...players1,'Thiago', 'Coutinho','Perisic'];
+
+// tỉ lệ kết quả trận đấu
+const game = {
+    score: "4.0",
+    scored : ['Davies', 'Muller', 'Lewandowski', 'Kimmich'],
+    date : "Nov 25, 1997",
+    odds: {team1: 1.33, draw: 3.25, team2: 6.5}
+
+}
+
+// hàm printGoals nhập tên cầu thủ đã ghi bàn
+const printGoals = [...[game.scored[0]],...[game.scored[1]],...[game.scored[2]],...[game.scored[3]]];
+// console.log(printGoals);
+document.getElementById("add").innerHTML = printGoals;
+
+//đội có tỉ lệ chấp thấp hơn
+// entries là hàm lấy tất cả thuộc tính của game.odds
+const array = Object.entries(game.odds);
+let hamSoSanh = (a,b) => a[1] - b[1];
+array.sort(hamSoSanh);
+// console.log(array[0][0]);
+document.getElementById("team_win").innerHTML = array[0][0];
+
+// CHANLLENGE2
+
+// in ra cầu thủ với số bàn thắng đã ghi
+var a = "";
+for ( i = 0; i < game.scored.length; i++){
+    a += 'Bàn thắng thứ ' + (i + 1) + ' được tạo do: ' + game.scored[i]+ '</br>';
+    // console.log(game.scored[i]);
+}
+document.getElementById("bai1").innerHTML = a;
+
+
+//tỉ lệ kết quả trận đấu
+
+var b = "";
+// const odd = Object.values(game.odds);
+let sum = 0;
+for(let i = 0; i < array.length; i++) {
+    sum += array[i][1];
+}
+sum /= array.length;
+b += 'Tỉ lệ kết quả trận đấu = ' + Math.ceil(sum);
+
+document.getElementById("bai2").innerHTML = b;
+
+//in tỉ lệ thắng của trận đấu
+var c = "";
+c += `Tỷ lệ thắng: ${game.team1} là  ${game.odds.team1}<br />`;
+c += `Tỷ lệ thắng: ${game.draw} là  ${game.odds.draw}<br />`;
+c += `Tỷ lệ thắng: ${game.team2} là  ${game.odds.team2}<br />`;
+
+document.getElementById("bai3").innerHTML = c;
+
+  </script>
+</html>
